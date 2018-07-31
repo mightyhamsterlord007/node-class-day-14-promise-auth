@@ -7,5 +7,22 @@ module.exports = {
             .then(products => resolve(products))
             .catch(error => reject(error));
       });
-  }  
+  },
+
+  createProduct: (params) => {
+    return new Promise((resolve, reject) => {
+      
+      const newProduct = new Product({
+        productName: params.productName,
+        category: params.category,
+        price: params.price,
+        description: params.description
+      });
+
+      newProduct.save()
+        .then( product => resolve(product))
+        .catch(error =>  reject(error));
+
+    });
+  }
 };
