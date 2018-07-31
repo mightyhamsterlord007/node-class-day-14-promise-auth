@@ -4,7 +4,23 @@ var productController = require('../controllers/productController');
 
 /* GET Product page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Product' });
+  
+  productController.getAllProducts({})
+    .then( products => {
+      res.json({
+        message: 'success',
+        data: products
+      });
+      return;
+    })
+    .catch(error => {
+      res.json({
+        message: 'Failure',
+        data: error
+      });
+      return;
+    });
+
 });
 
 router.post('/createproduct', function(req, res, next) {
